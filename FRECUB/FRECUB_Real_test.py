@@ -1,6 +1,5 @@
 from matplotlib import pyplot as plt
 import pandas as pd
-
 import json
 import numpy as np
 import random
@@ -76,6 +75,3 @@ for i in range(len(para)):
         # plt.plot(cc_re[0:5001], label="SCLUB")
     print(para[i])
     print(lis)
-
-
-
