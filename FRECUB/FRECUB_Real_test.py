@@ -32,7 +32,7 @@ def main(beta, num_stages, num_users, d, m, L, pj, users, items, user_items, ite
 def Read_data(data):
 
     user_features = None
-    name1 = "G:/论文/MAB/数据/"
+    name1 = "directory"
     item_features = np.load(name1 + data + "/items_features.npy")
     users = np.load(name1 + data + "/users.npy")
     users = users.tolist()
