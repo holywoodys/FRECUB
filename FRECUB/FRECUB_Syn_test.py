@@ -30,7 +30,7 @@ def main(beta, num_stages, num_users, d, m, L, pj, users, items, user_items, ite
 def Read_data(data):
 
     user_features = None
-    name1 = "G:/论文/MAB/数据/Synthetic datasets/"
+    name1 = "directory/Synthetic datasets/"
     item_features = np.load(name1 + data + "/items_features.npy")
     users = np.load(name1 + data + "/users.npy")
     users = users.tolist()
@@ -78,7 +78,7 @@ for i in range(len(para)):
     arr[i][3] = np.min(result)
     print(para[i], result, arr[i])
     df = pd.DataFrame(arr, index=index_rows, columns=index_columns)
-    # df.to_csv("G:/论文/MAB/Webscope_R6B/新建文件夹/最终实验/" + data + "_" + "SCLUB.csv")
+    # df.to_csv("directory/" + data + "_" + "FRECUB-syn.csv")
 
 print(df)
 
