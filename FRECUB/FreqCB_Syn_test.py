@@ -4,7 +4,7 @@ import json
 import numpy as np
 import random
 import time
-from FRECUB import FRECUB
+from FreqCB import FreqCB
 
 
 def main(beta, num_stages, num_users, d, m, L, pj, users, items, user_items, item_features, iterations):
@@ -16,14 +16,14 @@ def main(beta, num_stages, num_users, d, m, L, pj, users, items, user_items, ite
     ps = [list(np.ones(num_users) / num_users)]
 
     p = ps[0]
-    model = FRECUB(beta, nu = num_users, d = d, p = p, num_stages = num_stages, users = users, items = items, user_items = user_items, item_features = item_features)
+    model = FreqCB(beta, nu = num_users, d = d, p = p, num_stages = num_stages, users = users, items = items, user_items = user_items, item_features = item_features)
     start = time.time()
-    cumulative_reward = model.run1()
+    cumulative_reward = model.run()
     end = time.time()
     execution_time = round(end - start, 1)
     execution_time = (str(round(execution_time / 60, 1)) + "m" if execution_time > 60 else str(execution_time) + "s")
 
-    print("SCLUB: {}  {}".format(cumulative_reward[iterations], execution_time))
+    print("FreqCB: {}  {}".format(cumulative_reward[iterations], execution_time))
     return cumulative_reward
 
 
@@ -56,9 +56,8 @@ number = 5
 
 para = [0.1, 0.3, 0.5, 0.7, 1]
 # para = [0.001,0.005, 0.01, 0.03, 0.05, 0.07, 0.1, 0.3, 0.5, 0.7, 1]
-result_SCLUB = []
-index_columns = ["CTR", "STD", "MAX", "MIN"]
 
+index_columns = ["CTR", "STD", "MAX", "MIN"]
 index_rows = [data for p in range(len(para))]
 arr = np.zeros((len(para), len(index_columns)))
 iterations = 50000
@@ -78,7 +77,7 @@ for i in range(len(para)):
     arr[i][3] = np.min(result)
     print(para[i], result, arr[i])
     df = pd.DataFrame(arr, index=index_rows, columns=index_columns)
-    # df.to_csv("directory/" + data + "_" + "FRECUB-syn.csv")
+    # df.to_csv("directory/" + data + "_" + "FreqCB-syn.csv")
 
 print(df)
 
