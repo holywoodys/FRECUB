@@ -20,9 +20,9 @@ class Cluster:
         self.checked = len(self.users) == sum(self.checks.values())
 
 
-class FRECUB(LinUCB_IND):
+class FreqCB(LinUCB_IND):
     def __init__(self, beta, nu, d, num_stages, p, users, items, user_items, item_features):
-        super(FRECUB, self).__init__(nu, d, 2 ** num_stages - 1)
+        super(FreqCB, self).__init__(nu, d, 2 ** num_stages - 1)
 
         self.clusters = {0: Cluster(users=[i for i in range(nu)], S=np.eye(d), b=np.zeros(d), N=0, checks={i: False for i in range(nu)})}
         self.cluster_inds = np.zeros(nu)
@@ -52,7 +52,7 @@ class FRECUB(LinUCB_IND):
         return fre
 
     def store_info_fd(self, i, x, y, t, r=1, br=1):
-        super(FRECUB, self).store_info(i, x, y, t, r, br)
+        super(FreqCB, self).store_info(i, x, y, t, r, br)
 
         c = self.cluster_inds[i]
         users = self.clusters[c].users
